@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeMirror Test</title>
+  <link rel="stylesheet" href="https://unpkg.com/codemirror@5.65.13/lib/codemirror.css">
+  <style>
+    #editor { height: 200px; }
+  </style>
+</head>
+<body>
+  <h1>Test Code with CodeMirror</h1>
+  <div id="editor">
+  <script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '66eb4f216a75bfc21d449232' },
+          url: 'https://general-runtime.voiceflow.com',
+          versionID: 'production'
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>  
+  
+  </div>
+  <button id="runCode">Run Code</button>
+
+  <script src="https://unpkg.com/codemirror@5.65.13/lib/codemirror.js"></script>
+  <script src="https://unpkg.com/codemirror@5.65.13/mode/javascript/javascript.js"></script>
+  <script>
+    // Initialize CodeMirror
+    const editor = CodeMirror(document.getElementById('editor'), {
+      mode: "javascript",
+      lineNumbers: true,
+      theme: "default"
+    });
+
+    // Run the code in the editor
+    document.getElementById('runCode').addEventListener('click', () => {
+      const userCode = editor.getValue();
+      try {
+        eval(userCode); // Executes the code typed in the editor
+      } catch (error) {
+        console.error("Error in code execution:", error);
+        alert("Error: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
